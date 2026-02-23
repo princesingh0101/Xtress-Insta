@@ -1,4 +1,4 @@
-]package main
+package main
 
 import (
 	"encoding/json"
@@ -7,27 +7,29 @@ import (
 	"log"
 	"net/http"
 	"os/exec"
+	"strings"
 )
 
 // YtDlpOutput matches the interesting parts of yt-dlp -j output
 type YtDlpOutput struct {
-	Title      string `json:"title"`
-	Thumbnail  string `json:"thumbnail"`
-	Formats    []struct {
+	Title     string `json:"title"`
+	Thumbnail string `json:"thumbnail"`
+	Formats   []struct {
 		FormatID   string `json:"format_id"`
 		URL        string `json:"url"`
 		Resolution string `json:"resolution"`
+		Height     int    `json:"height"`
 		Ext        string `json:"ext"`
-		FileSize   int64  `json:"filesize"`
 		VCodec     string `json:"vcodec"`
 		ACodec     string `json:"acodec"`
 	} `json:"formats"`
 }
 
 type VideoInfo struct {
-	Title     string     `json:"title"`
-	Thumbnail string     `json:"thumbnail"`
-	Files     []FileInfo `json:"files"`
+	Title      string     `json:"title"`
+	Thumbnail  string     `json:"thumbnail"`
+	PreviewURL string     `json:"preview_url"`
+	Files      []FileInfo `json:"files"`
 }
 
 type FileInfo struct {
@@ -66,43 +68,66 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Filter formats to get some useful ones (prefer mp4 with both audio and video)
 	info := VideoInfo{
 		Title:     raw.Title,
 		Thumbnail: raw.Thumbnail,
 	}
 
+	seenQualities := make(map[string]bool)
+
 	for _, f := range raw.Formats {
-		// Just an example: pick some formats. In a real app, you'd be more selective.
+		// Filter for mp4 with both audio and video
 		if f.Ext == "mp4" && f.VCodec != "none" && f.ACodec != "none" {
-			quality := f.Resolution
-			if quality == "" {
-				quality = f.FormatID
+			qualityLabel := ""
+			if f.Height > 0 {
+				qualityLabel = fmt.Sprintf("%dp", f.Height)
+			} else if f.Resolution != "" && f.Resolution != "multiple" {
+				// If resolution is like 640x1136, take the smaller number for "p" label usually, 
+				// but for vertical videos (Reels), height is the larger one. 
+				// Let's just try to extract the height part.
+				parts := strings.Split(f.Resolution, "x")
+				if len(parts) == 2 {
+					qualityLabel = parts[1] + "p"
+				} else {
+					qualityLabel = f.Resolution
+				}
 			}
-			info.Files = append(info.Files, FileInfo{
-				Quality: quality,
-				URL:     f.URL,
-			})
+
+			if qualityLabel == "" {
+				qualityLabel = "HD"
+			}
+
+			// Avoid duplicates and keep it clean
+			if !seenQualities[qualityLabel] {
+				info.Files = append(info.Files, FileInfo{
+					Quality: qualityLabel,
+					URL:     f.URL,
+				})
+				seenQualities[qualityLabel] = true
+			}
+			
+			// Set the first good quality as the preview URL
+			if info.PreviewURL == "" {
+				info.PreviewURL = f.URL
+			}
 		}
 	}
 	
-	// If no combined formats found, try to just provide what's there
+	// Fallback if no specific formats found
 	if len(info.Files) == 0 && len(raw.Formats) > 0 {
-		for i, f := range raw.Formats {
-			if i > 5 { break } // Limit
-			info.Files = append(info.Files, FileInfo{
-				Quality: f.FormatID,
-				URL: f.URL,
-			})
-		}
+		info.PreviewURL = raw.Formats[0].URL
+		info.Files = append(info.Files, FileInfo{
+			Quality: "Download",
+			URL: raw.Formats[0].URL,
+		})
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(w).Encode(info)
 }
 
 func main() {
-	// Serve static files
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
