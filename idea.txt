@@ -1,0 +1,140 @@
+🚀 Xtress Insta – Website Specification (Markdown)
+# Xtress Insta - Instagram Reels & Video Downloader
+A clean, fast, responsive web tool to download Instagram Reels, Videos, Stories, Photos and IGTV. No login required, free to use, works on all devices.
+
+---
+
+## 🏠 Homepage
+### Title
+**Xtress Insta – Insta Video & Reel Downloader**
+
+### Header
+- Logo: “Xtress Insta”
+- Navigation: Home | Features | How it works | FAQs
+
+### Hero Section
+- Big bold heading: *Download Instagram Reels & Videos in HD*
+- Sub-text: *Paste your Instagram link and get download links instantly.*
+- Input box for URL + Download button
+
+### Example UI
+
+[ Paste Instagram/Reel URL ] [ Download ▶️ ]
+
+
+### Features Summary
+- Fast & Free
+- No Login Required
+- Supports Reels, Videos, Stories, IGTV
+- Works on Mobile & Desktop
+
+---
+
+## 📥 Download Page
+### How it Works
+1. Copy Instagram post/Reel URL
+2. Paste it in the input box
+3. Click “Download”
+4. Choose quality
+5. Save to your device
+
+(Text based on common downloader UX) :contentReference[oaicite:1]{index=1}
+
+### Output Section
+After processing:
+
+🔹 Video Title
+🔹 Show video thumbnail
+🔹 Download Buttons:
+• MP4 1080p
+• MP4 720p
+• MP4 480p
+
+
+---
+
+## 📚 Supported Tools
+Supports downloads from:
+- Instagram Reels
+- Instagram Stories
+- Instagram Photos
+- IGTV
+- TikTok (if added later)
+- Facebook (optional)
+
+---
+
+## 📜 How It Works (Explained)
+### 1. Paste the URL
+User pastes the video link from Instagram (Reel, Story, IGTV). :contentReference[oaicite:2]{index=2}
+
+### 2. Server Extracts Media
+The backend parses the link and fetches video data.
+
+### 3. Generate Download Links
+Server returns direct MP4 links in different qualities.
+
+### 4. Download to Device
+User taps or clicks to save video on device.
+
+---
+
+## 📦 Backend API Endpoints
+
+GET / — render homepage
+POST /download — accepts { url }
+GET /api/video?url=xxx — returns JSON video info + download links
+
+
+### JSON Example
+```json
+{
+  "title": "Instagram Reel",
+  "thumbnail": "https://cdn…",
+  "files": [
+    { "quality": "1080p", "url": "download-link-1080p.mp4" },
+    { "quality": "720p", "url": "download-link-720p.mp4" }
+  ]
+}
+⚙️ Tech Stack
+
+Backend: Golang (Go)
+
+Frontend: HTML5 + CSS3 + JS
+
+Video Extraction: Custom Go parser or yt-dlp / internal scraper service
+
+Hosting: AWS / VPS / Render.com
+
+📱 Responsive Design
+
+Works on Mobile, Tablet, Desktop
+
+Clean minimal UI
+
+Input-first design prioritizing flow
+
+💡 UX & Safety
+
+No login/password required
+
+Does NOT store user data
+
+Only processes public URLs
+
+Must respect copyright & privacy
+
+❓ FAQs
+Q: Is it safe to use?
+A: Yes — no accounts or data stored.
+
+Q: Which posts can I download?
+A: Reels, Videos, Stories, IGTV from public profiles.
+
+Q: Can private content be downloaded?
+A: No — respects Instagram rules.
+📌 Footer
+
+© 2026 Xtress Insta
+
+Privacy Policy | Terms of Service | Contact

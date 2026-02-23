@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xtress Insta – Insta Video & Reel Downloader</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Xtress Insta</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Download Instagram Reels & Videos in HD</h1>
+                <p>Paste your Instagram link and get download links instantly.</p>
+                
+                <div class="downloader-wrapper">
+                    <div class="input-container">
+                        <i class="fas fa-link link-icon"></i>
+                        <input type="text" id="video_url" placeholder="Paste Instagram/Reel URL..." autocomplete="off">
+                        <button id="clear_btn" class="clear-btn" title="Clear input"><i class="fas fa-times"></i></button>
+                    </div>
+                    <button id="download_btn" class="main-download-btn">Download <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div id="loading" class="loading-spinner" style="display: none;">
+                    <i class="fas fa-circle-notch fa-spin"></i> Processing your request...
+                </div>
+
+                <div id="result" class="result-section" style="display: none;">
+                    <!-- Result will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Features Summary</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                        <h3>Fast & Free</h3>
+                        <p>High-speed extraction and completely free to use without limits.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fas fa-user-shield"></i></div>
+                        <h3>No Login Required</h3>
+                        <p>Download directly without logging into your account for privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile Compatible</h3>
+                        <p>Optimized for all screen sizes, perfect for your smartphone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How it Works</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <p>Copy the Instagram Reel or Video URL from the app.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <p>Paste the link into the box above.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <p>Click "Download" and choose your preferred quality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faqs" class="faqs">
+            <div class="container">
+                <h2 class="section-title">Common Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <h3><i class="far fa-question-circle"></i> Is it safe to use?</h3>
+                        <p>Absolutely. We don't require login, passwords, or store any personal data.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="far fa-question-circle"></i> What can I download?</h3>
+                        <p>You can download Reels, Videos, Photos, and Stories from public Instagram accounts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <p>&copy; 2026 Xtress Insta. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const input = document.getElementById('video_url');
+        const clearBtn = document.getElementById('clear_btn');
+        const downloadBtn = document.getElementById('download_btn');
+        const resultDiv = document.getElementById('result');
+        const loadingDiv = document.getElementById('loading');
+
+        // Show/hide clear button
+        input.addEventListener('input', () => {
+            clearBtn.style.visibility = input.value ? 'visible' : 'hidden';
+        });
+
+        // Clear input logic
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            clearBtn.style.visibility = 'hidden';
+            input.focus();
+        });
+
+        downloadBtn.addEventListener('click', async () => {
+            const url = input.value.trim();
+            if (!url) {
+                alert('Please paste a valid Instagram URL');
+                return;
+            }
+
+            loadingDiv.style.display = 'block';
+            resultDiv.style.display = 'none';
+            resultDiv.classList.remove('show');
+
+            try {
+                const response = await fetch(`/api/video?url=${encodeURIComponent(url)}`);
+                if (!response.ok) {
+                    throw new Error('Could not fetch video info. Please check the URL.');
+                }
+                const data = await response.json();
+                
+                if (!data.files || data.files.length === 0) {
+                    throw new Error('No downloadable links found for this URL.');
+                }
+
+                let buttonsHtml = '';
+                data.files.forEach(f => {
+                    buttonsHtml += `
+                        <div class="download-option">
+                            <span class="quality-label">${f.quality || 'HD'}</span>
+                            <a href="${f.URL}" target="_blank" class="download-action-btn">
+                                Download MP4 <i class="fas fa-download"></i>
+                            </a>
+                        </div>`;
+                });
+
+                resultDiv.innerHTML = `
+                    <div class="result-card">
+                        <h3 class="video-title">${data.title || 'Instagram Content'}</h3>
+                        <div class="thumbnail-wrapper">
+                            <img src="${data.thumbnail}" alt="Video Thumbnail" class="video-thumbnail">
+                            <div class="play-overlay"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="download-list">
+                            <h4 class="list-header">Choose Download Quality:</h4>
+                            ${buttonsHtml}
+                        </div>
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+                // Trigger animation
+                setTimeout(() => resultDiv.classList.add('show'), 10);
+                
+                // Scroll to result on mobile
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
