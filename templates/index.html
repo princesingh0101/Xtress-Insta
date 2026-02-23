@@ -49,7 +49,7 @@
         </div>
     </header>
 
-    <!-- Full Window About Us Overlay -->
+    <!-- About Us Overlay -->
     <div id="about_overlay" class="full-overlay">
         <button id="close_about" class="close-overlay"><i class="fas fa-times"></i></button>
         <div class="overlay-content container">
@@ -57,14 +57,12 @@
                 <span class="company-badge">Frext Corporation</span>
                 <h1>About Xtress Insta</h1>
                 <p class="lead">Simplifying Media Downloads for the Modern Web.</p>
-                
                 <div class="about-grid">
                     <div class="about-text">
                         <h3>Our Mission</h3>
-                        <p>Xtress Insta was born out of a simple need: to provide users with a fast, secure, and high-quality way to save their favorite social media content. We believe that accessing your favorite memories and creative inspirations should be effortless and free from intrusive logins.</p>
-                        
+                        <p>Xtress Insta was born out of a simple need: to provide users with a fast, secure, and high-quality way to save their favorite social media content.</p>
                         <h3>Who We Are</h3>
-                        <p>Xtress Insta is a flagship product of <strong>Frext Corporation</strong>. We are a technology-driven organization dedicated to building clean, efficient, and user-centric web tools that solve everyday digital challenges.</p>
+                        <p>Xtress Insta is a flagship product of <strong>Frext Corporation</strong>.</p>
                     </div>
                     <div class="about-ceo">
                         <div class="ceo-box">
@@ -75,24 +73,29 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="about-values">
-                    <div class="value-item">
-                        <i class="fas fa-user-lock"></i>
-                        <h4>Privacy First</h4>
-                        <p>No login, no data storage, total anonymity.</p>
-                    </div>
-                    <div class="value-item">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <h4>Ultimate Speed</h4>
-                        <p>Engineered for high-speed metadata extraction.</p>
-                    </div>
-                    <div class="value-item">
-                        <i class="fas fa-award"></i>
-                        <h4>HD Quality</h4>
-                        <p>Always providing the best available resolution.</p>
-                    </div>
-                </div>
+    <!-- Privacy Policy Overlay -->
+    <div id="privacy_overlay" class="full-overlay">
+        <button id="close_privacy" class="close-overlay"><i class="fas fa-times"></i></button>
+        <div class="overlay-content container">
+            <div class="document-card">
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last Updated: February 2026</p>
+                <p>Xtress Insta does not collect or store your data, period.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Overlay -->
+    <div id="terms_overlay" class="full-overlay">
+        <button id="close_terms" class="close-overlay"><i class="fas fa-times"></i></button>
+        <div class="overlay-content container">
+            <div class="document-card">
+                <h1>Terms of Service</h1>
+                <p>By using this tool, you agree to the terms of use.</p>
             </div>
         </div>
     </div>
@@ -102,7 +105,6 @@
             <div class="container">
                 <h1>Download Instagram Reels & Videos</h1>
                 <p>Paste your Instagram link and get download links instantly in HD.</p>
-                
                 <div class="downloader-wrapper">
                     <div class="input-container">
                         <i class="fas fa-link link-icon"></i>
@@ -111,84 +113,21 @@
                     </div>
                     <button id="download_btn" class="main-download-btn">Download <i class="fas fa-arrow-right"></i></button>
                 </div>
-
                 <div id="loading" class="loading-spinner" style="display: none;">
-                    <i class="fas fa-circle-notch fa-spin"></i> Processing video info...
+                    <i class="fas fa-circle-notch fa-spin"></i> Processing video...
                 </div>
-
-                <div id="result" class="result-section" style="display: none;">
-                    <!-- Result with Video Player will be injected here -->
-                </div>
+                <div id="result" class="result-section" style="display: none;"></div>
             </div>
         </section>
 
+        <!-- Informational Sections -->
         <section id="features" class="features">
             <div class="container">
                 <h2 class="section-title">Features Summary</h2>
                 <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="icon-box"><i class="fas fa-bolt"></i></div>
-                        <h3>Fast & Free</h3>
-                        <p>High-speed extraction and completely free to use without limits.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="icon-box"><i class="fas fa-user-shield"></i></div>
-                        <h3>No Login Required</h3>
-                        <p>Download directly without logging into your account for total privacy.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
-                        <h3>Works on All Devices</h3>
-                        <p>Optimized for Mobile, Tablet, and Desktop browsers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="how-it-works" class="how-it-works">
-            <div class="container">
-                <h2 class="section-title">How it Works</h2>
-                <div class="steps-grid">
-                    <div class="step">
-                        <span class="step-num">1</span>
-                        <p>Copy the Instagram post or Reel URL from your app.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">2</span>
-                        <p>Paste the link into the input box above.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">3</span>
-                        <p>Click "Download" to generate the video preview.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">4</span>
-                        <p>Choose your preferred quality (720p, 1080p, etc.).</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">5</span>
-                        <p>Save the video directly to your device.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faqs" class="faqs">
-            <div class="container">
-                <h2 class="section-title">Common Questions (FAQs)</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <h3><i class="far fa-question-circle"></i> Is it safe to use?</h3>
-                        <p>Yes — no accounts, passwords, or personal data are ever stored.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3><i class="far fa-question-circle"></i> Which posts can I download?</h3>
-                        <p>You can download Reels, Videos, Stories, and IGTV from public profiles.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3><i class="far fa-question-circle"></i> Can private content be downloaded?</h3>
-                        <p>No — we respect Instagram's privacy rules and only process public content.</p>
-                    </div>
+                    <div class="feature-card"><div class="icon-box"><i class="fas fa-bolt"></i></div><h3>Fast & Free</h3><p>High-speed extraction without limits.</p></div>
+                    <div class="feature-card"><div class="icon-box"><i class="fas fa-user-shield"></i></div><h3>No Login</h3><p>Download directly for privacy.</p></div>
+                    <div class="feature-card"><div class="icon-box"><i class="fas fa-mobile-alt"></i></div><h3>Responsive</h3><p>Works on all devices browsers.</p></div>
                 </div>
             </div>
         </section>
@@ -197,8 +136,8 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="javascript:void(0)" id="privacy_link">Privacy Policy</a>
+                <a href="javascript:void(0)" id="terms_link">Terms of Service</a>
                 <a href="#">Contact Us</a>
             </div>
             <p>&copy; 2026 Xtress Insta | Made with ❤️ for Instagram Users</p>
@@ -215,107 +154,64 @@
         const navMenu = document.getElementById('nav_menu');
         const moreToggle = document.getElementById('more_toggle');
         const moreDropdown = document.getElementById('more_dropdown');
-        const aboutLink = document.getElementById('about_link');
-        const aboutOverlay = document.getElementById('about_overlay');
-        const closeAbout = document.getElementById('close_about');
+        
+        // Overlay Elements
+        const overlays = {
+            about: { link: document.getElementById('about_link'), box: document.getElementById('about_overlay'), close: document.getElementById('close_about') },
+            privacy: { link: document.getElementById('privacy_link'), box: document.getElementById('privacy_overlay'), close: document.getElementById('close_privacy') },
+            terms: { link: document.getElementById('terms_link'), box: document.getElementById('terms_overlay'), close: document.getElementById('close_terms') }
+        };
 
-        // About Us Toggle
-        aboutLink.addEventListener('click', () => {
-            aboutOverlay.classList.add('active');
+        const openOverlay = (overlay) => {
+            overlay.classList.add('active');
             navMenu.classList.remove('active');
-            document.body.style.overflow = 'hidden'; // Prevent scroll
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeOverlay = (overlay) => {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        Object.values(overlays).forEach(o => {
+            o.link.onclick = () => openOverlay(o.box);
+            o.close.onclick = () => closeOverlay(o.box);
         });
 
-        closeAbout.addEventListener('click', () => {
-            aboutOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scroll
-        });
-
-        // Hamburger Menu Toggle
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // More Dropdown Toggle
-        moreToggle.addEventListener('click', (e) => {
+        menuToggle.onclick = () => navMenu.classList.toggle('active');
+        moreToggle.onclick = (e) => {
             e.stopPropagation();
             moreDropdown.classList.toggle('active');
             moreToggle.querySelector('i').classList.toggle('fa-chevron-up');
             moreToggle.querySelector('i').classList.toggle('fa-chevron-down');
-        });
+        };
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
+        input.oninput = () => clearBtn.style.visibility = input.value ? 'visible' : 'hidden';
+        clearBtn.onclick = () => { input.value = ''; clearBtn.style.visibility = 'hidden'; input.focus(); };
 
-        input.addEventListener('input', () => {
-            clearBtn.style.visibility = input.value ? 'visible' : 'hidden';
-        });
-
-        clearBtn.addEventListener('click', () => {
-            input.value = '';
-            clearBtn.style.visibility = 'hidden';
-            input.focus();
-        });
-
-        downloadBtn.addEventListener('click', async () => {
+        downloadBtn.onclick = async () => {
             const url = input.value.trim();
-            if (!url) {
-                alert('Please paste a valid URL');
-                return;
-            }
-
+            if (!url) return;
             loadingDiv.style.display = 'block';
             resultDiv.style.display = 'none';
             resultDiv.classList.remove('show');
-
             try {
                 const response = await fetch(`/api/video?url=${encodeURIComponent(url)}`);
-                if (!response.ok) throw new Error('Failed to fetch video');
                 const data = await response.json();
-                
                 let buttonsHtml = '';
                 data.files.forEach(f => {
-                    buttonsHtml += `
-                        <div class="quality-row">
-                            <span class="quality-text">${f.quality}</span>
-                            <a href="${f.URL}" target="_blank" class="dl-btn" download>
-                                Download <i class="fas fa-download"></i>
-                            </a>
-                        </div>`;
+                    buttonsHtml += `<div class="quality-row"><span class="quality-text">${f.quality}</span><a href="${f.URL}" target="_blank" class="dl-btn" download>Download <i class="fas fa-download"></i></a></div>`;
                 });
-
-                resultDiv.innerHTML = `
-                    <div class="result-card">
-                        <h3 class="video-title">${data.title || 'Instagram Video'}</h3>
-                        
-                        <div class="player-container">
-                            <video controls poster="${data.thumbnail}" class="video-player">
-                                <source src="${data.preview_url}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                        <div class="quality-list">
-                            <h4 class="list-label">Download Quality:</h4>
-                            ${buttonsHtml}
-                        </div>
-                    </div>
-                `;
+                resultDiv.innerHTML = `<div class="result-card"><h3 class="video-title">${data.title || 'Instagram Video'}</h3><div class="player-container"><video controls poster="${data.thumbnail}" class="video-player"><source src="${data.preview_url}" type="video/mp4"></video></div><div class="quality-list"><h4 class="list-label">Download Quality:</h4>${buttonsHtml}</div></div>`;
                 resultDiv.style.display = 'block';
                 setTimeout(() => resultDiv.classList.add('show'), 10);
-                
                 resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
             } catch (error) {
                 alert('Error: ' + error.message);
             } finally {
                 loadingDiv.style.display = 'none';
             }
-        });
+        };
     </script>
 </body>
 </html>
