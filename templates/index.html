@@ -40,6 +40,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How it works</a></li>
                     <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="javascript:void(0)" id="about_link">About Us</a></li>
                 </ul>
             </nav>
             <button id="menu_toggle" class="menu-toggle" title="Menu">
@@ -47,6 +48,54 @@
             </button>
         </div>
     </header>
+
+    <!-- Full Window About Us Overlay -->
+    <div id="about_overlay" class="full-overlay">
+        <button id="close_about" class="close-overlay"><i class="fas fa-times"></i></button>
+        <div class="overlay-content container">
+            <div class="about-card">
+                <span class="company-badge">Frext Corporation</span>
+                <h1>About Xtress Insta</h1>
+                <p class="lead">Simplifying Media Downloads for the Modern Web.</p>
+                
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Our Mission</h3>
+                        <p>Xtress Insta was born out of a simple need: to provide users with a fast, secure, and high-quality way to save their favorite social media content. We believe that accessing your favorite memories and creative inspirations should be effortless and free from intrusive logins.</p>
+                        
+                        <h3>Who We Are</h3>
+                        <p>Xtress Insta is a flagship product of <strong>Frext Corporation</strong>. We are a technology-driven organization dedicated to building clean, efficient, and user-centric web tools that solve everyday digital challenges.</p>
+                    </div>
+                    <div class="about-ceo">
+                        <div class="ceo-box">
+                            <i class="fas fa-user-tie ceo-icon"></i>
+                            <h4>Prince Kumar</h4>
+                            <p>Founder & CEO</p>
+                            <span class="frext-logo">Frext Corp.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-values">
+                    <div class="value-item">
+                        <i class="fas fa-user-lock"></i>
+                        <h4>Privacy First</h4>
+                        <p>No login, no data storage, total anonymity.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h4>Ultimate Speed</h4>
+                        <p>Engineered for high-speed metadata extraction.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-award"></i>
+                        <h4>HD Quality</h4>
+                        <p>Always providing the best available resolution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         <section class="hero">
@@ -166,6 +215,21 @@
         const navMenu = document.getElementById('nav_menu');
         const moreToggle = document.getElementById('more_toggle');
         const moreDropdown = document.getElementById('more_dropdown');
+        const aboutLink = document.getElementById('about_link');
+        const aboutOverlay = document.getElementById('about_overlay');
+        const closeAbout = document.getElementById('close_about');
+
+        // About Us Toggle
+        aboutLink.addEventListener('click', () => {
+            aboutOverlay.classList.add('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        });
+
+        closeAbout.addEventListener('click', () => {
+            aboutOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        });
 
         // Hamburger Menu Toggle
         menuToggle.addEventListener('click', () => {
