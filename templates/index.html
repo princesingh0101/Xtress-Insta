@@ -12,8 +12,31 @@
         <div class="container nav-container">
             <div class="logo">Xtress Insta</div>
             <nav id="nav_menu">
+                <div class="menu-header">Menu</div>
                 <ul>
                     <li><a href="#">Home</a></li>
+                    
+                    <!-- Dropdown Section -->
+                    <li class="has-dropdown">
+                        <div id="more_toggle" class="dropdown-header">
+                            More From Xtress Insta <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <ul id="more_dropdown" class="dropdown-list">
+                            <li><a href="#"><i class="fab fa-instagram"></i> Download Video Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i> Download Video Facebook</a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i> Download Video Youtube</a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i> Download Shorts - YouTube</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram igtv download</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram photo download</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram reels download</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram story download</a></li>
+                            <li><a href="#"><i class="fab fa-tiktok"></i> Download Video Tiktok</a></li>
+                            <li><a href="#"><i class="fas fa-info-circle"></i> How to use Fb video downloader - Xtress Insta?</a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i> Download Video X(Formely-twitter)</a></li>
+                            <li><a href="#"><i class="fas fa-at"></i> Download Video Threads</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How it works</a></li>
                     <li><a href="#faqs">FAQs</a></li>
@@ -141,17 +164,27 @@
         const loadingDiv = document.getElementById('loading');
         const menuToggle = document.getElementById('menu_toggle');
         const navMenu = document.getElementById('nav_menu');
+        const moreToggle = document.getElementById('more_toggle');
+        const moreDropdown = document.getElementById('more_dropdown');
 
         // Hamburger Menu Toggle
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+        // More Dropdown Toggle
+        moreToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moreDropdown.classList.toggle('active');
+            moreToggle.querySelector('i').classList.toggle('fa-chevron-up');
+            moreToggle.querySelector('i').classList.toggle('fa-chevron-down');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
                 navMenu.classList.remove('active');
-            });
+            }
         });
 
         input.addEventListener('input', () => {

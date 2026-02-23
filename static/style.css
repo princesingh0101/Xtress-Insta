@@ -62,50 +62,98 @@ header {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text);
-    display: block; /* Show on both mobile and desktop as requested */
 }
 
+/* Sidebar Navigation */
 nav#nav_menu {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     right: 0;
+    height: 100vh;
     background: var(--white);
-    width: 250px;
-    box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+    width: 300px;
+    max-width: 85%;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     transform: translateX(100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
 }
 
 nav#nav_menu.active {
     transform: translateX(0);
 }
 
+.menu-header {
+    padding: 25px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    border-bottom: 1px solid #eee;
+    background: #fcfcfc;
+}
+
 nav ul {
-    display: flex;
-    flex-direction: column;
     list-style: none;
-    padding: 20px;
+    padding: 10px 0;
 }
 
 nav ul li {
-    margin: 10px 0;
+    padding: 0 15px;
 }
 
-nav ul li a {
+nav ul li a, .dropdown-header {
     text-decoration: none;
     color: var(--text);
     font-weight: 600;
     font-size: 1rem;
-    display: block;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.2s;
+    cursor: pointer;
 }
 
-nav ul li a:hover {
+nav ul li a:hover, .dropdown-header:hover {
     background: #f0f0f0;
     color: var(--primary);
+}
+
+/* Dropdown Sub-menu */
+.dropdown-header {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    margin: 5px 0;
+}
+
+.dropdown-list {
+    display: none;
+    padding-left: 15px;
+    background: #fafafa;
+    border-radius: 0 0 10px 10px;
+}
+
+.dropdown-list.active {
+    display: block;
+    border-left: 3px solid var(--primary);
+}
+
+.dropdown-list li {
+    padding: 0;
+}
+
+.dropdown-list li a {
+    font-size: 0.9rem;
+    padding: 12px 15px;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.dropdown-list li a i {
+    width: 20px;
+    color: var(--primary);
+    text-align: center;
 }
 
 /* Hero Section */
@@ -169,7 +217,6 @@ nav ul li a:hover {
     background: transparent;
 }
 
-/* Small X Button for Clear Input */
 .clear-btn {
     background: #f0f0f0;
     border: none;
@@ -182,11 +229,9 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     visibility: hidden;
-    transition: all 0.2s;
     font-size: 0.8rem;
     margin-left: 10px;
 }
-.clear-btn:hover { background: #e0e0e0; color: #444; }
 
 .main-download-btn {
     padding: 20px 45px;
@@ -201,12 +246,6 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.main-download-btn:hover {
-    background: #222;
-    transform: translateY(-2px);
 }
 
 /* Result Card */
@@ -232,12 +271,6 @@ nav ul li a:hover {
     margin: 0 auto;
 }
 
-.video-title {
-    margin-bottom: 25px;
-    font-size: 1.3rem;
-    font-weight: 700;
-}
-
 .player-container {
     border-radius: 20px;
     overflow: hidden;
@@ -250,20 +283,6 @@ nav ul li a:hover {
     width: 100%;
     max-height: 450px;
     display: block;
-}
-
-.quality-list {
-    text-align: left;
-}
-
-.list-label {
-    font-size: 1rem;
-    color: var(--gray);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
 }
 
 .quality-row {
@@ -280,7 +299,6 @@ nav ul li a:hover {
 .quality-text {
     font-weight: 800;
     color: var(--primary);
-    font-size: 1.1rem;
 }
 
 .dl-btn {
@@ -290,17 +308,14 @@ nav ul li a:hover {
     text-decoration: none;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 0.95rem;
 }
 
-/* Other Sections */
+/* FAQs & Sections */
 .features { padding: 80px 0; background: #fff; }
 .section-title { text-align: center; margin-bottom: 40px; font-size: 2.2rem; font-weight: 800; }
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 .feature-card { padding: 30px; background: var(--bg); border-radius: 15px; text-align: center; }
-.icon-box { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
 
-/* How it works */
 .how-it-works { padding: 80px 0; }
 .steps-grid {
     display: grid;
@@ -308,41 +323,24 @@ nav ul li a:hover {
     gap: 30px;
     text-align: center;
 }
-.step-num {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--primary);
-    opacity: 0.2;
-    margin-bottom: -15px;
-}
 
-/* FAQs */
 .faqs { padding: 80px 0; background: var(--white); }
 .faq-container { max-width: 800px; margin: 0 auto; }
 .faq-item { margin-bottom: 30px; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px; }
-.faq-item:last-child { border-bottom: none; }
-.faq-item h3 { margin-bottom: 10px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
-.faq-item h3 i { color: var(--primary); }
 
-/* Footer */
 footer {
     padding: 60px 0;
     background: #111;
     color: #888;
     text-align: center;
 }
-.footer-links { margin-bottom: 20px; }
-.footer-links a { color: #888; text-decoration: none; margin: 0 15px; font-size: 0.9rem; }
-.footer-links a:hover { color: var(--white); }
 
 /* Responsive */
 @media (max-width: 768px) {
     .hero { padding: 50px 0 80px; }
-    .hero h1 { font-size: 2rem; }
+    .hero h1 { font-size: 2.2rem; }
     .downloader-wrapper { padding: 15px; border-radius: 0; background: transparent; backdrop-filter: none; }
     .main-download-btn { width: 100%; border-radius: 12px; }
-    .result-card { padding: 15px; border-radius: 10px; }
 }
 
 @media (min-width: 769px) {
